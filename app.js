@@ -36,6 +36,12 @@ app.get('/success',checkCookie,(req,res)=>{
     //You will reach here only if session is working Fine
 });
 
+app.get('/spare_parts',checkCookie,(req,res)=>{
+    res.sendFile(__dirname + '/spare_parts.html');
+    console.log("UID of Signed in User is: " + req.decodedClaims.uid);
+    //You will reach here only if session is working Fine
+});
+
 app.get('/savecookie',(req,res)=>{
     const Idtoken=req.query.idToken;
     console.log("Idtoken of Signed in User is: " + Idtoken);

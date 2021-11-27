@@ -10,9 +10,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </style>
 
 <div>
-    <h1>Expedientes</h1>
+    <h1>Reporte de refacciones</h1>
 
-    <a href="/spare_parts">Refacciones</a>  
+    <a href="/success">Expedientes</a>  
     <a href="/logout">Salir del sistema</a>  
 </div>
 
@@ -24,21 +24,17 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     </div>
 </div>
 
-<table class="table table-striped">
-    <tr  class="bg-info">
-        <th data-column="id" data-order="desc">Expediente &#9650</th>
-        <th data-column="customer" data-order="desc">Cliente &#9650</th>
-        <th data-column="brand" data-order="desc">Marca &#9650</th>
-        <th data-column="color" data-order="desc">Color &#9650</th>
-        <th data-column="model" data-order="desc">Modelo &#9650</th>
-        <th data-column="year" data-order="desc">Año &#9650</th>
-        <th data-column="entrydate" data-order="desc">Fecha de Ingreso &#9650</th>
-        <th data-column="commitmentdate" data-order="desc">Fecha Promesa &#9650</th>
-        <th data-column="email" data-order="desc">E-mail &#9650</th>
-        <th data-column="phone" data-order="desc">Teléfono &#9650</th>        
+<table class="table table-dark">
+    <tr  class="bg-secondary">
+        <th data-column=cone data-order="desc">cone &#9650</th>
+        <th data-column=description data-order="desc">description &#9650</th>
+        <th data-column=priority data-order="desc">priority &#9650</th>
+        <th data-column=quantity data-order="desc">quantity &#9650</th>
+        <th data-column=status data-order="desc">status &#9650</th>
+        <th data-column=supplier data-order="desc">supplier &#9650</th>            
     </tr>
 
-    <tbody id="myTable">
+    <tbody id="myTableSP">
         
     </tbody>
 </table>
@@ -48,7 +44,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
     $.ajax({
         method: 'GET',
-        url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_cones',
+        url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
         success: function(response){
             myArray = response
             buildTable(myArray)
@@ -80,7 +76,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
         $.ajax({
             method: 'GET',
-            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_cones',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
             success: function(response){
                 myArray = response
             }
@@ -126,7 +122,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     }
 
 	function buildTable(data){
-		var table = document.getElementById('myTable')
+		var table = document.getElementById('myTableSP')
 
         table.innerHTML = ''
 
