@@ -1,19 +1,29 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Create_Cone</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<style>
-    th{ 
-        color:#fff;
-    }
-    label, td{
-        width:200px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    }
-</style>
+    <style>
+        th{ 
+            color:#fff;
+        }
+        label, td{
+            width:200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
 
 <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -163,48 +173,81 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </table>
 </form>
 
-<script>
-	var myArray = []
+    <script>
+        var myArray = []
+        $(document).ready(function (){
+            $('#submit').click(function() {
+                var form = document.getElementById('post_cone')
+                //form.addEventListener('submit', function(event){
+                    //event.preventDefault()
+                    //var text = $(this).html()
+                var brand = document.getElementById('brand').value
+                var color = document.getElementById('color').value
+                var comment = document.getElementById('comment').value
+                var commitmentdate = document.getElementById('commitmentdate').value
+                var crane = document.getElementById('crane').value
+                var customer = document.getElementById('customer').value
+                var deductibleadapt = document.getElementById('deductibleadapt').value
+                var deductibletract = document.getElementById('deductibletract').value
+                var demerit = document.getElementById('demerit').value
+                var economicnumber = document.getElementById('economicnumber').value
+                var egressdate = document.getElementById('egressdate').value
+                var email = document.getElementById('email').value
+                var entrydate = document.getElementById('entrydate').value
+                var family = document.getElementById('family').value
+                var insurer = document.getElementById('insurer').value
+                var model = document.getElementById('model').value
+                var phone = document.getElementById('phone').value
+                var plates = document.getElementById('plates').value
+                var policy = document.getElementById('policy').value
+                var report = document.getElementById('report').value
+                var risk = document.getElementById('risk').value
+                var seriesnumber = document.getElementById('seriesnumber').value
+                var status = document.getElementById('status').value
+                var year = document.getElementById('year').value
+                
+                //$(this).html(text)
+                var jsonData = {
+                    brand: brand,
+                    color: color,
+                    comment: comment,
+                    commitmentdate: commitmentdate,
+                    crane: crane,
+                    customer: customer,
+                    deductibleadapt: deductibleadapt,
+                    deductibletract: deductibletract,
+                    demerit: demerit,
+                    economicnumber: economicnumber,
+                    egressdate: egressdate,
+                    email: email,
+                    entrydate: entrydate,
+                    family: family,
+                    insurer: insurer,
+                    model: model,
+                    phone: phone,
+                    plates: plates,
+                    policy: policy,
+                    report: report,
+                    risk: risk,
+                    seriesnumber: seriesnumber,
+                    status: status,
+                    year: year
+                }
 
-    //$('submit').on('click', function()
-    var form = document.getElementById('post_cone')
-    form.addEventListener('submit', function(event){
-        event.preventDefault()
-        var text = $(this).html()
-        var brand = document.getElementById('brand').value
-        var color = document.getElementById('color').value
-        var comment = document.getElementById('comment').value
-        var commitmentdate = document.getElementById('commitmentdate').value
-        var crane = document.getElementById('crane').value
-        var customer = document.getElementById('customer').value
-        var deductibleadapt = document.getElementById('deductibleadapt').value
-        var deductibletract = document.getElementById('deductibletract').value
-        var demerit = document.getElementById('demerit').value
-        var economicnumber = document.getElementById('economicnumber').value
-        var egressdate = document.getElementById('egressdate').value
-        var email = document.getElementById('email').value
-        var entrydate = document.getElementById('entrydate').value
-        var family = document.getElementById('family').value
-        var insurer = document.getElementById('insurer').value
-        var model = document.getElementById('model').value
-        var phone = document.getElementById('phone').value
-        var plates = document.getElementById('plates').value
-        var policy = document.getElementById('policy').value
-        var report = document.getElementById('report').value
-        var risk = document.getElementById('risk').value
-        var seriesnumber = document.getElementById('seriesnumber').value
-        var status = document.getElementById('status').value
-        var year = document.getElementById('year').value
-        
-        $(this).html(text)
-
-        $.ajax({
-            method: 'POST',
-            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
-            success: function(response){
-                myArray = response
-            }
+                $.ajax({
+                    //method: 'POST',
+                    url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(jsonData),
+                    success: function(response){
+                        console.log(response)
+                    }
+                })
+                //})
+            })
         })
-    })
 
-</script>
+    </script>
+</html>
