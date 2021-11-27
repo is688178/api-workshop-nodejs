@@ -50,7 +50,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         <th data-column="entrydate" data-order="desc">Fecha de Ingreso &#9650</th>
         <th data-column="commitmentdate" data-order="desc">Fecha Promesa &#9650</th>
         <th data-column="email" data-order="desc">E-mail &#9650</th>
-        <th data-column="phone" data-order="desc">Teléfono &#9650</th>        
+        <th data-column="phone" data-order="desc">Teléfono &#9650</th>
+        <th>Refacciones</th>        
     </tr>
 
     <tbody id="myTable">
@@ -164,7 +165,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		for (var i = 0; i < data.length; i++){
 			var row = `<tr>
-                        <td><a href="/spare_parts?id=${data[i].id}">${data[i].id}</a></td>        
+                        <td><a href="/create_cone?id=${data[i].id}">${data[i].id}</a></td>        
                         <td>${data[i].cone.customer}</td>
                         <td>${data[i].cone.brand}</td>
                         <td>${data[i].cone.color}</td>
@@ -174,10 +175,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                         <td>${data[i].cone.commitmentdate}</td>
                         <td>${data[i].cone.email}</td>                        
                         <td>${data[i].cone.phone}</td>
+                        <td><a role="button" class="btn btn-primary" href="/spare_parts?id=${data[i].id}">Refacciones</a></td>
 					  </tr>`
 			table.innerHTML += row
-
-
 		}
 	}
 
