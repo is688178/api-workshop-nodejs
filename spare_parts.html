@@ -42,14 +42,34 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 <script>
 	var myArray = []
-    $.ajax({
-        method: 'GET',
-        url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
-        success: function(response){
-            myArray = response
-            buildTable(myArray)
-        }
-    })
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    console.log(queryString)
+    if(urlParams.has('id')){
+        const urlParamId = urlParams.get('id')
+        console.log('urlParamId:', urlParamId)
+        document.getElementById("search-input").value = urlParamId
+
+        $.ajax({
+            method: 'GET',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
+            success: function(response){
+                myArray = response
+                var data = searchTable(urlParamId, myArray)
+                buildTable(data)
+            }
+        })
+    } else {
+        $.ajax({
+            method: 'GET',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
+            success: function(response){
+                myArray = response
+                buildTable(myArray)
+            }
+        })
+    }
 
     $('th').on('click', function(){
         var column = $(this).data('column')
@@ -112,8 +132,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
         return filteredData
     }
-
-    buildTable(myArray)
 
 	function buildTable(data){
 		var table = document.getElementById('myTableSP')

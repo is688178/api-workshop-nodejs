@@ -149,7 +149,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		for (var i = 0; i < data.length; i++){
 			var row = `<tr>
-                        <td>${data[i].id}</td>        
+                        <td><a href="/spare_parts?id=${data[i].id}">${data[i].id}</a></td>        
                         <td>${data[i].cone.customer}</td>
                         <td>${data[i].cone.brand}</td>
                         <td>${data[i].cone.color}</td>
