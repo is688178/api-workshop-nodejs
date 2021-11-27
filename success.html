@@ -1,6 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <style>
     th{ 
@@ -10,6 +11,8 @@
 
 <div>
     <h1>Expedientes</h1>
+
+    <a href="/logout">Log out</a>  
 </div>
 
 <div class="row">
@@ -44,7 +47,7 @@
 
     $.ajax({
         method: 'GET',
-        url: 'https://us-central1-api-workshop-688178.cloudfunctions.net/app/api/read_cones',
+        url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_cones',
         success: function(response){
             myArray = response
             buildTable(myArray)
@@ -76,7 +79,7 @@
 
         $.ajax({
             method: 'GET',
-            url: 'https://us-central1-api-workshop-688178.cloudfunctions.net/app/api/read_cones',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_cones',
             success: function(response){
                 myArray = response
             }
