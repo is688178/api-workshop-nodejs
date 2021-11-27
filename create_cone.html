@@ -22,14 +22,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     <a href="/logout">Salir del sistema</a>  
 </div>
 
-<div class="row">
-    <div class="col">
-        <div class="card card-body">
-            <input id="search-input" class="form-control" type="text">
-        </div>
-    </div>
-</div>
-
+<form method="post" id="post_cone">
 <table class="table table-dark">
     <!--<tr  class="bg-secondary">
         <th data-column=cone data-order="desc">cone &#9650</th>
@@ -163,7 +156,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
             <input type="text" name="comment">
         </td>
     </tr>
+    <input type="submit" name="submit" id="submit" value="Submit">
 </table>
+</form>
 
 <script>
 	var myArray = []
@@ -177,98 +172,36 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         }
     })
 
-    $('th').on('click', function(){
-        var column = $(this).data('column')
-        var order = $(this).data('order')
+    //$('submit').on('click', function()
+    var form = document.getElementById('post_cone')
+    form.addEventListener('submit', function(event){
+        event.preventDefault()
         var text = $(this).html()
-        text = text.substring(0, text.length -1)
-
-        if(order == 'desc'){
-            $(this).data('order', "asc")
-            myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1)
-            text += '&#9660'
-        }else{
-            $(this).data('order', "desc")
-            myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1)
-            text += '&#9650'
-        }
-
+        var brand = document.getElementById('brand').value
+        var color = document.getElementById('color').value
+        var comment = document.getElementById('comment').value
+        var commitmentdate = document.getElementById('commitmentdate').value
+        var crane = document.getElementById('crane').value
+        var customer = document.getElementById('customer').value
+        var deductibleadapt = document.getElementById('deductibleadapt').value
+        var deductibletract = document.getElementById('deductibletract').value
+        var demerit = document.getElementById('demerit').value
+        var economicnumber = document.getElementById('economicnumber').value
+        var egressdate = document.getElementById('egressdate').value
+        var email = document.getElementById('email').value
+        var entrydate = document.getElementById('entrydate').value
+        var family = document.getElementById('family').value
+        var insurer = document.getElementById('insurer').value
+        var model = document.getElementById('model').value
+        var phone = document.getElementById('phone').value
+        var plates = document.getElementById('plates').value
+        var policy = document.getElementById('policy').value
+        var report = document.getElementById('report').value
+        var risk = document.getElementById('risk').value
+        var seriesnumber = document.getElementById('seriesnumber').value
+        var status = document.getElementById('status').value
+        var year = document.getElementById('year').value
         $(this).html(text)
-        buildTable(myArray)
     })
-
-    $('#search-input').on('keyup', function(){
-        var value = $(this).val()
-
-        $.ajax({
-            method: 'POST',
-            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
-            success: function(response){
-                myArray = response
-            }
-        })
-
-        var data = searchTable(value, myArray)
-        buildTable(data)
-    })
-
-    function searchTable(value, data){
-        var filteredData= []
-        for (var i = 0; i < data.length; i++){
-            value = value.toLowerCase()
-            var id = data[i].id.toLowerCase()
-            var customer = data[i].cone.customer.toLowerCase()
-            var brand = data[i].cone.brand.toLowerCase()
-            var color = data[i].cone.color.toLowerCase()
-            var model = data[i].cone.model.toLowerCase()
-            var year = data[i].cone.year.toString().toLowerCase()
-            var commitmentdate = data[i].cone.commitmentdate.toLowerCase()
-            var email = data[i].cone.email.toLowerCase()
-            var entrydate = data[i].cone.entrydate.toLowerCase()
-            var phone = data[i].cone.phone.toLowerCase()
-
-
-            if(id.includes(value)
-            || customer.includes(value)
-            || brand.includes(value)
-            || color.includes(value)
-            || model.includes(value)
-            || year.includes(value)
-            || commitmentdate.includes(value)
-            || email.includes(value)
-            || entrydate.includes(value)
-            || phone.includes(value)
-            ){
-                filteredData.push(data[i])
-            }
-
-        }
-
-        return filteredData
-    }
-
-	function buildTable(data){
-		var table = document.getElementById('myTableSP')
-
-        table.innerHTML = ''
-
-		for (var i = 0; i < data.length; i++){
-			var row = `<tr>
-                        <td>${data[i].id}</td>        
-                        <td>${data[i].cone.customer}</td>
-                        <td>${data[i].cone.brand}</td>
-                        <td>${data[i].cone.color}</td>
-                        <td>${data[i].cone.model}</td>
-                        <td>${data[i].cone.year}</td>
-                        <td>${data[i].cone.entrydate}</td>
-                        <td>${data[i].cone.commitmentdate}</td>
-                        <td>${data[i].cone.email}</td>                        
-                        <td>${data[i].cone.phone}</td>
-					  </tr>`
-			table.innerHTML += row
-
-
-		}
-	}
 
 </script>
