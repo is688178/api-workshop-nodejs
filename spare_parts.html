@@ -26,12 +26,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 <table class="table table-dark">
     <tr  class="bg-secondary">
-        <th data-column=cone data-order="desc">cone &#9650</th>
-        <th data-column=description data-order="desc">description &#9650</th>
-        <th data-column=priority data-order="desc">priority &#9650</th>
-        <th data-column=quantity data-order="desc">quantity &#9650</th>
-        <th data-column=status data-order="desc">status &#9650</th>
-        <th data-column=supplier data-order="desc">supplier &#9650</th>            
+        <th data-column="cone" data-order="desc">Expediente &#9650</th>
+        <th data-column="description" data-order="desc">Descripción &#9650</th>
+        <th data-column="priority" data-order="desc">Prioridad &#9650</th>
+        <th data-column="quantity" data-order="desc">Cantidad &#9650</th>
+        <th data-column="status" data-order="desc">Estatus &#9650</th>
+        <th data-column="supplier" data-order="desc">Proveedor &#9650</th>            
     </tr>
 
     <tbody id="myTableSP">
@@ -41,7 +41,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 <script>
 	var myArray = []
-
     $.ajax({
         method: 'GET',
         url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
@@ -56,14 +55,15 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         var order = $(this).data('order')
         var text = $(this).html()
         text = text.substring(0, text.length -1)
+        console.log(column, order, text)
 
         if(order == 'desc'){
             $(this).data('order', "asc")
-            myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1)
+            myArray = myArray.sort((a,b) => a.spare_part[column] > b.spare_part[column] ? 1 : -1)
             text += '&#9660'
         }else{
             $(this).data('order', "desc")
-            myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1)
+            myArray = myArray.sort((a,b) => a.spare_part[column] < b.spare_part[column] ? 1 : -1)
             text += '&#9650'
         }
 
@@ -90,28 +90,19 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         var filteredData= []
         for (var i = 0; i < data.length; i++){
             value = value.toLowerCase()
-            var id = data[i].id.toLowerCase()
-            var customer = data[i].cone.customer.toLowerCase()
-            var brand = data[i].cone.brand.toLowerCase()
-            var color = data[i].cone.color.toLowerCase()
-            var model = data[i].cone.model.toLowerCase()
-            var year = data[i].cone.year.toString().toLowerCase()
-            var commitmentdate = data[i].cone.commitmentdate.toLowerCase()
-            var email = data[i].cone.email.toLowerCase()
-            var entrydate = data[i].cone.entrydate.toLowerCase()
-            var phone = data[i].cone.phone.toLowerCase()
+            var cone = data[i].spare_part.cone.toLowerCase()
+            var description = data[i].spare_part.description.toLowerCase()
+            var priority = data[i].spare_part.priority.toLowerCase()
+            var quantity = data[i].spare_part.quantity
+            var status = data[i].spare_part.status.toLowerCase()
+            var supplier = data[i].spare_part.supplier.toLowerCase()
 
-
-            if(id.includes(value)
-            || customer.includes(value)
-            || brand.includes(value)
-            || color.includes(value)
-            || model.includes(value)
-            || year.includes(value)
-            || commitmentdate.includes(value)
-            || email.includes(value)
-            || entrydate.includes(value)
-            || phone.includes(value)
+            if(cone.includes(value)
+            || description.includes(value)
+            || priority.includes(value)
+            || quantity.includes(value)
+            || status.includes(value)
+            || supplier.includes(value)
             ){
                 filteredData.push(data[i])
             }
@@ -121,6 +112,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         return filteredData
     }
 
+    buildTable(myArray)
+
 	function buildTable(data){
 		var table = document.getElementById('myTableSP')
 
@@ -128,20 +121,14 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		for (var i = 0; i < data.length; i++){
 			var row = `<tr>
-                        <td>${data[i].id}</td>        
-                        <td>${data[i].cone.customer}</td>
-                        <td>${data[i].cone.brand}</td>
-                        <td>${data[i].cone.color}</td>
-                        <td>${data[i].cone.model}</td>
-                        <td>${data[i].cone.year}</td>
-                        <td>${data[i].cone.entrydate}</td>
-                        <td>${data[i].cone.commitmentdate}</td>
-                        <td>${data[i].cone.email}</td>                        
-                        <td>${data[i].cone.phone}</td>
+                        <td>${data[i].spare_part.cone}</td> 
+                        <td>${data[i].spare_part.description}</td> 
+                        <td>${data[i].spare_part.priority}</td> 
+                        <td>${data[i].spare_part.quantity}</td> 
+                        <td>${data[i].spare_part.status}</td> 
+                        <td>${data[i].spare_part.supplier}</td> 
 					  </tr>`
 			table.innerHTML += row
-
-
 		}
 	}
 
