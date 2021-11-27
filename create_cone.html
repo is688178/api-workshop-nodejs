@@ -1,0 +1,274 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    th{ 
+        color:#fff;
+    }
+    label, td{
+        width:200px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>
+
+<div>
+    <h1>Nueva refaccion</h1>
+
+    <a href="/success">Expedientes</a>  
+    <a href="/logout">Salir del sistema</a>  
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <input id="search-input" class="form-control" type="text">
+        </div>
+    </div>
+</div>
+
+<table class="table table-dark">
+    <!--<tr  class="bg-secondary">
+        <th data-column=cone data-order="desc">cone &#9650</th>
+        <th data-column=description data-order="desc">description &#9650</th>
+        <th data-column=priority data-order="desc">priority &#9650</th>
+        <th data-column=quantity data-order="desc">quantity &#9650</th>
+        <th data-column=status data-order="desc">status &#9650</th>
+        <th data-column=supplier data-order="desc">supplier &#9650</th>            
+    </tr>
+
+    <tbody id="myTableSP">
+        
+    </tbody>-->
+    <tr>
+        <td>
+            <label>Insurer</label>
+            <input type="text" name="insurer">
+        </td>
+        <td>
+            <label>Family</label>
+            <input type="text" name="family">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Brand</label>
+            <input type="text" name="brand">
+        </td>
+        <td>
+            <label>Color</label>
+            <input type="text" name="color">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Report</label>
+            <input type="text" name="report">
+        </td>
+        <td>
+            <label>Policy</label>
+            <input type="text" name="policy">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Entry Date</label>
+            <input type="text" name="entrydate">
+        </td>
+        <td>
+            <label>Commitment Date</label>
+            <input type="text" name="commitmentdate">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Egress Date</label>
+            <input type="text" name="egressdate">
+        </td>
+        <td>
+            <label>Series Number</label>
+            <input type="text" name="seriesnumber">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Economic Number</label>
+            <input type="text" name="economicnumber">
+        </td>
+        <td>
+            <label>Model</label>
+            <input type="text" name="model">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Plates</label>
+            <input type="text" name="plates">
+        </td>
+        <td>
+            <label>Demerit</label>
+            <input type="number" name="demerit">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Risk</label>
+            <input type="text" name="risk">
+        </td>
+        <td>
+            <label>status</label>
+            <input type="text" name="status">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Deductible Tract</label>
+            <input type="number" name="deductibletract">
+        </td>
+        <td>
+            <label>Deductible Adapt</label>
+            <input type="number" name="deductibleadapt">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Crane</label>
+            <input type="text" name="crane">
+        </td>
+        <td>
+            <label>Year</label>
+            <input type="number" name="year">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Customer</label>
+            <input type="text" name="customer">
+        </td>
+        <td>
+            <label>Phone</label>
+            <input type="text" name="phone">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Email</label>
+            <input type="text" name="email">
+        </td>
+        <td>
+            <label>Comment</label>
+            <input type="text" name="comment">
+        </td>
+    </tr>
+</table>
+
+<script>
+	var myArray = []
+
+    $.ajax({
+        method: 'POST',
+        url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
+        success: function(response){
+            myArray = response
+            buildTable(myArray)
+        }
+    })
+
+    $('th').on('click', function(){
+        var column = $(this).data('column')
+        var order = $(this).data('order')
+        var text = $(this).html()
+        text = text.substring(0, text.length -1)
+
+        if(order == 'desc'){
+            $(this).data('order', "asc")
+            myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1)
+            text += '&#9660'
+        }else{
+            $(this).data('order', "desc")
+            myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1)
+            text += '&#9650'
+        }
+
+        $(this).html(text)
+        buildTable(myArray)
+    })
+
+    $('#search-input').on('keyup', function(){
+        var value = $(this).val()
+
+        $.ajax({
+            method: 'POST',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
+            success: function(response){
+                myArray = response
+            }
+        })
+
+        var data = searchTable(value, myArray)
+        buildTable(data)
+    })
+
+    function searchTable(value, data){
+        var filteredData= []
+        for (var i = 0; i < data.length; i++){
+            value = value.toLowerCase()
+            var id = data[i].id.toLowerCase()
+            var customer = data[i].cone.customer.toLowerCase()
+            var brand = data[i].cone.brand.toLowerCase()
+            var color = data[i].cone.color.toLowerCase()
+            var model = data[i].cone.model.toLowerCase()
+            var year = data[i].cone.year.toString().toLowerCase()
+            var commitmentdate = data[i].cone.commitmentdate.toLowerCase()
+            var email = data[i].cone.email.toLowerCase()
+            var entrydate = data[i].cone.entrydate.toLowerCase()
+            var phone = data[i].cone.phone.toLowerCase()
+
+
+            if(id.includes(value)
+            || customer.includes(value)
+            || brand.includes(value)
+            || color.includes(value)
+            || model.includes(value)
+            || year.includes(value)
+            || commitmentdate.includes(value)
+            || email.includes(value)
+            || entrydate.includes(value)
+            || phone.includes(value)
+            ){
+                filteredData.push(data[i])
+            }
+
+        }
+
+        return filteredData
+    }
+
+	function buildTable(data){
+		var table = document.getElementById('myTableSP')
+
+        table.innerHTML = ''
+
+		for (var i = 0; i < data.length; i++){
+			var row = `<tr>
+                        <td>${data[i].id}</td>        
+                        <td>${data[i].cone.customer}</td>
+                        <td>${data[i].cone.brand}</td>
+                        <td>${data[i].cone.color}</td>
+                        <td>${data[i].cone.model}</td>
+                        <td>${data[i].cone.year}</td>
+                        <td>${data[i].cone.entrydate}</td>
+                        <td>${data[i].cone.commitmentdate}</td>
+                        <td>${data[i].cone.email}</td>                        
+                        <td>${data[i].cone.phone}</td>
+					  </tr>`
+			table.innerHTML += row
+
+
+		}
+	}
+
+</script>
