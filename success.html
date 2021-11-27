@@ -1,14 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Successfully Signed in</title>
-</head>
-<body>
-    <h1>Successfully Signed in, check console for UID</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  
-    <a href="/logout">Log out</a>    
-</body>
-</html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    th{ 
+        color:#fff;
+            }
+</style>
+
+<div>
+    <h1>Expedientes</h1>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <input id="search-input" class="form-control" type="text">
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th data-column="id" data-order="desc">Expediente &#9650</th>
+        <th data-column="customer" data-order="desc">Cliente &#9650</th>
+        <th data-column="brand" data-order="desc">Marca &#9650</th>
+        <th data-column="color" data-order="desc">Color &#9650</th>
+        <th data-column="model" data-order="desc">Modelo &#9650</th>
+        <th data-column="year" data-order="desc">Año &#9650</th>
+        <th data-column="entrydate" data-order="desc">Fecha de Ingreso &#9650</th>
+        <th data-column="commitmentdate" data-order="desc">Fecha Promesa &#9650</th>
+        <th data-column="email" data-order="desc">E-mail &#9650</th>
+        <th data-column="phone" data-order="desc">Teléfono &#9650</th>        
+    </tr>
+
+    <tbody id="myTable">
+        
+    </tbody>
+</table>
+
+<script>
+	var myArray = []
+
+    $.ajax({
+        method: 'GET',
+        url: 'https://us-central1-api-workshop-688178.cloudfunctions.net/app/api/read_cones',
+        success: function(response){
+            myArray = response
+            buildTable(myArray)
+        }
+    })
+
+    $('th').on('click', function(){
+        var column = $(this).data('column')
+        var order = $(this).data('order')
+        var text = $(this).html()
+        text = text.substring(0, text.length -1)
+
+        if(order == 'desc'){
+            $(this).data('order', "asc")
+            myArray = myArray.sort((a,b) => a[column] > b[column] ? 1 : -1)
+            text += '&#9660'
+        }else{
+            $(this).data('order', "desc")
+            myArray = myArray.sort((a,b) => a[column] < b[column] ? 1 : -1)
+            text += '&#9650'
+        }
+
+        $(this).html(text)
+        buildTable(myArray)
+    })
+
+    $('#search-input').on('keyup', function(){
+        var value = $(this).val()
+
+        $.ajax({
+            method: 'GET',
+            url: 'https://us-central1-api-workshop-688178.cloudfunctions.net/app/api/read_cones',
+            success: function(response){
+                myArray = response
+            }
+        })
+
+        var data = searchTable(value, myArray)
+        buildTable(data)
+    })
+
+    function searchTable(value, data){
+        var filteredData= []
+        for (var i = 0; i < data.length; i++){
+            value = value.toLowerCase()
+            var id = data[i].id.toLowerCase()
+            var customer = data[i].cone.customer.toLowerCase()
+            var brand = data[i].cone.brand.toLowerCase()
+            var color = data[i].cone.color.toLowerCase()
+            var model = data[i].cone.model.toLowerCase()
+            var year = data[i].cone.year.toString().toLowerCase()
+            var commitmentdate = data[i].cone.commitmentdate.toLowerCase()
+            var email = data[i].cone.email.toLowerCase()
+            var entrydate = data[i].cone.entrydate.toLowerCase()
+            var phone = data[i].cone.phone.toLowerCase()
+
+
+            if(id.includes(value)
+            || customer.includes(value)
+            || brand.includes(value)
+            || color.includes(value)
+            || model.includes(value)
+            || year.includes(value)
+            || commitmentdate.includes(value)
+            || email.includes(value)
+            || entrydate.includes(value)
+            || phone.includes(value)
+            ){
+                filteredData.push(data[i])
+            }
+
+        }
+
+        return filteredData
+    }
+
+	function buildTable(data){
+		var table = document.getElementById('myTable')
+
+        table.innerHTML = ''
+
+		for (var i = 0; i < data.length; i++){
+			var row = `<tr>
+                        <td>${data[i].id}</td>        
+                        <td>${data[i].cone.customer}</td>
+                        <td>${data[i].cone.brand}</td>
+                        <td>${data[i].cone.color}</td>
+                        <td>${data[i].cone.model}</td>
+                        <td>${data[i].cone.year}</td>
+                        <td>${data[i].cone.entrydate}</td>
+                        <td>${data[i].cone.commitmentdate}</td>
+                        <td>${data[i].cone.email}</td>                        
+                        <td>${data[i].cone.phone}</td>
+					  </tr>`
+			table.innerHTML += row
+
+
+		}
+	}
+
+</script>
