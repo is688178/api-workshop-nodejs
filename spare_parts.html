@@ -48,9 +48,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     console.log(queryString)
     if(urlParams.has('id')){
         const urlParamId = urlParams.get('id')
-        console.log('urlParamId:', urlParamId)
-        document.getElementById("search-input").value = urlParamId
-
         $.ajax({
             method: 'GET',
             url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_spare_parts',
