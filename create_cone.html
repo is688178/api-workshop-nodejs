@@ -163,15 +163,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <script>
 	var myArray = []
 
-    $.ajax({
-        method: 'POST',
-        url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
-        success: function(response){
-            myArray = response
-            buildTable(myArray)
-        }
-    })
-
     //$('submit').on('click', function()
     var form = document.getElementById('post_cone')
     form.addEventListener('submit', function(event){
@@ -201,7 +192,16 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         var seriesnumber = document.getElementById('seriesnumber').value
         var status = document.getElementById('status').value
         var year = document.getElementById('year').value
+        
         $(this).html(text)
+
+        $.ajax({
+            method: 'POST',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
+            success: function(response){
+                myArray = response
+            }
+        })
     })
 
 </script>
