@@ -42,6 +42,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <table class="table table-striped">
     <tr  class="bg-info">
         <th data-column="id" data-order="desc">Expediente &#9650</th>
+        <th data-column="id" data-order="desc">Estatus &#9650</th>
         <th data-column="customer" data-order="desc">Cliente &#9650</th>
         <th data-column="brand" data-order="desc">Marca &#9650</th>
         <th data-column="color" data-order="desc">Color &#9650</th>
@@ -126,6 +127,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         for (var i = 0; i < data.length; i++){
             value = value.toLowerCase()
             var id = data[i].id.toLowerCase()
+            var status = data[i].cone.status.toLowerCase()
             var customer = data[i].cone.customer.toLowerCase()
             var brand = data[i].cone.brand.toLowerCase()
             var color = data[i].cone.color.toLowerCase()
@@ -138,6 +140,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 
             if(id.includes(value)
+            || status.includes(value)
             || customer.includes(value)
             || brand.includes(value)
             || color.includes(value)
@@ -165,7 +168,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		for (var i = 0; i < data.length; i++){
 			var row = `<tr>
-                        <td><a href="/create_cone?id=${data[i].id}">${data[i].id}</a></td>        
+                        <td><a href="/create_cone?id=${data[i].id}">${data[i].id}</a></td>
+                        <td>${data[i].cone.status}</td>        
                         <td>${data[i].cone.customer}</td>
                         <td>${data[i].cone.brand}</td>
                         <td>${data[i].cone.color}</td>

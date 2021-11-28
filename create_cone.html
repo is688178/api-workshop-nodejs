@@ -187,8 +187,12 @@
 
     <div>
         <p class="ex1"> 
-            <button  id="postButton" class="btn btn-primary btn-lg" type="submit">
+            <button  id="postButton" class="btn btn-primary btn-block" type="submit">
                 Guardar expediente
+            </button>
+
+            <button  id="putButton" class="btn btn-secondary btn-block" type="submit">
+                Editar expediente
             </button>
         </p>
     </div>
@@ -305,6 +309,79 @@
                 //method: 'POST',
                 url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
                 type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(jsonData),
+                success: function(response){
+                    console.log(response)
+                }
+            })
+        })
+
+        $('#putButton').on('click', function() {
+            console.log('putButton...')
+            var form = document.getElementById('cone_form')
+            var id = document.getElementById('id').value    
+            var brand = document.getElementById('brand').value
+            var color = document.getElementById('color').value
+            var comment = document.getElementById('comment').value
+            var commitmentdate = document.getElementById('commitmentdate').value
+            var crane = document.getElementById('crane').value
+            var customer = document.getElementById('customer').value
+            var deductibleadapt = document.getElementById('deductibleadapt').value
+            var deductibletract = document.getElementById('deductibletract').value
+            var demerit = document.getElementById('demerit').value
+            var economicnumber = document.getElementById('economicnumber').value
+            var egressdate = document.getElementById('egressdate').value
+            var email = document.getElementById('email').value
+            var entrydate = document.getElementById('entrydate').value
+            var family = document.getElementById('family').value
+            var insurer = document.getElementById('insurer').value
+            var model = document.getElementById('model').value
+            var phone = document.getElementById('phone').value
+            var plates = document.getElementById('plates').value
+            var policy = document.getElementById('policy').value
+            var report = document.getElementById('report').value
+            var risk = document.getElementById('risk').value
+            var seriesnumber = document.getElementById('seriesnumber').value
+            var status = document.getElementById('status').value
+            var year = document.getElementById('year').value
+            
+            var jsonData = {
+                cone:{
+                    brand: brand,
+                    color: color,
+                    comment: comment,
+                    commitmentdate: commitmentdate,
+                    crane: crane,
+                    customer: customer,
+                    deductibleadapt: deductibleadapt,
+                    deductibletract: deductibletract,
+                    demerit: demerit,
+                    economicnumber: economicnumber,
+                    egressdate: egressdate,
+                    email: email,
+                    entrydate: entrydate,
+                    family: family,
+                    insurer: insurer,
+                    model: model,
+                    phone: phone,
+                    plates: plates,
+                    policy: policy,
+                    report: report,
+                    risk: risk,
+                    seriesnumber: seriesnumber,
+                    status: status,
+                    year: year
+                }
+            }
+
+            console.log('jsonData', jsonData)
+
+            $.ajax({
+                //method: 'UPDATE',
+                url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/update_cone/'+id,
+                type: 'PUT',
                 contentType: 'application/json',
                 dataType: 'json',
                 data: JSON.stringify(jsonData),
