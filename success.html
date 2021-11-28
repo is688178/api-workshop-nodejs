@@ -6,7 +6,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <style>
     th{ 
         color:#fff;
-            }
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #212331;
+    }
 </style>
 
 <div>
@@ -169,21 +174,51 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		for (var i = 0; i < data.length; i++){
 			var row = `<tr>
-                        <td><a href="/create_cone?id=${data[i].id}">${data[i].id}</a></td>
-                        <td>${data[i].cone.status}</td>        
-                        <td>${data[i].cone.customer}</td>
-                        <td>${data[i].cone.brand}</td>
-                        <td>${data[i].cone.color}</td>
-                        <td>${data[i].cone.model}</td>
+                        <td><a href="/create_cone?id=${data[i].id}">${data[i].id.toUpperCase()}</a></td>
+                        <td>${data[i].cone.status.toUpperCase()}</td>        
+                        <td>${data[i].cone.customer.toUpperCase()}</td>
+                        <td>${data[i].cone.brand.toUpperCase()}</td>
+                        <td>${data[i].cone.color.toUpperCase()}</td>
+                        <td>${data[i].cone.model.toUpperCase()}</td>
                         <td>${data[i].cone.year}</td>
                         <td>${data[i].cone.entrydate}</td>
                         <td>${data[i].cone.commitmentdate}</td>
-                        <td>${data[i].cone.email}</td>                        
+                        <td>${data[i].cone.email.toUpperCase()}</td>                        
                         <td>${data[i].cone.phone}</td>
                         <td><a role="button" class="btn btn-primary" href="/spare_parts?id=${data[i].id}">Refacciones</a></td>
 					  </tr>`
 			table.innerHTML += row
 		}
+
+        parseColorCells(table)
 	}
+
+    function parseColorCells(theTable){
+        // First loop the table rows.
+        for(let r = 0, l = theTable.rows.length; r < l; r++) {
+            // Second loop the rows column cells.
+            for(let c = 0, e = theTable.rows[r].cells.length; c < e; c++) {
+            try {
+                // Get the contents and convert to number from string and set the current cell.      
+                let currentCellString = theTable.rows[r].cells[c].innerHTML.toString().toLowerCase();
+                let currentCell = theTable.rows[r].cells[c];
+                
+                // If the contents are special Strings then change colors.
+                if (currentCellString.includes("entregado") || currentCellString.includes("trasladado")) {
+                currentCell.style.backgroundColor = 'DarkGreen';
+                } else if (currentCellString.includes("aceptado") || currentCellString.includes("aprovado")
+                        || currentCellString.includes("autorizado") || currentCellString.includes("repar")) {
+                currentCell.style.backgroundColor = 'DarkGoldenRod';
+                } else if (currentCellString.includes("reclam") || currentCellString.includes("garant")){
+                currentCell.style.backgroundColor = 'DarkRed';
+                }
+            }
+            // If there was error like cell contents aren't actually numbers, or table wasn't found etc, then alert via try/catch.
+            catch {
+                alert('Something is wrong with the input, are you sure your table cells only have numbers?')
+                }
+            }
+        }
+    }
 
 </script>
