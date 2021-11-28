@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="">
     </head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -196,11 +197,11 @@
     <div>
         <p class="ex1"> 
             <button  id="postButton" class="btn btn-primary btn-block" type="submit">
-                Guardar expediente
+                Crear expediente
             </button>
 
             <button  id="putButton" class="btn btn-secondary btn-block" type="submit">
-                Editar expediente
+                Actualizar expediente
             </button>
         </p>
     </div>
@@ -313,17 +314,42 @@
 
             console.log('jsonData', jsonData)
 
-            $.ajax({
-                //method: 'POST',
-                url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
-                type: 'POST',
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(jsonData),
-                success: function(response){
-                    console.log(response)
-                }
-            })
+                $.ajax({
+                    //method: 'POST',
+                    url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_cone',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(jsonData),
+                    statusCode: {
+                        200: function() {
+                            swal({
+                                title: "Correcto",
+                                text: "Expediente creado.",
+                                icon: "success",
+                                button: "Continuar",
+                            });
+                        },
+                        500: function() {
+                            swal({
+                                title: "Error",
+                                text: "El expediente no ha sido creado. ¿Incluiste el ID del expediente?",
+                                icon: "warning",
+                                button: "Continuar",
+                            });
+                        },
+                        default: function() {
+                            swal({
+                                title: "Error",
+                                text: "El expediente no ha sido creado. ¿Incluiste el ID del expediente?",
+                                icon: "warning",
+                                button: "Continuar",
+                            });
+                        }
+                    }
+                })
+
+
         })
 
         $('#putButton').on('click', function() {
@@ -386,17 +412,50 @@
 
             console.log('jsonData', jsonData)
 
-            $.ajax({
-                //method: 'UPDATE',
-                url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/update_cone/'+id,
-                type: 'PUT',
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(jsonData),
-                success: function(response){
-                    console.log(response)
+            var status = $.ajax({
+            //method: 'UPDATE',
+            url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/update_cone/'+id,
+            type: 'PUT',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(jsonData),
+            statusCode: {
+                200: function() {
+                    swal({
+                        title: "Correcto",
+                        text: "Expediente actualizado.",
+                        icon: "success",
+                        button: "Continuar",
+                    });
+                },
+                404: function() {
+                    swal({
+                        title: "Error",
+                        text: "El expediente no ha sido actualizado. ¿Incluiste el ID del expediente?",
+                        icon: "warning",
+                        button: "Continuar",
+                    });
+                },
+                500: function() {
+                    swal({
+                        title: "Error",
+                        text: "El expediente no ha sido actualizado. ¿Incluiste el ID del expediente?",
+                        icon: "warning",
+                        button: "Continuar",
+                    });
+                },
+                default: function() {
+                    swal({
+                        title: "Error",
+                        text: "El expediente no ha sido actualizado. ¿Incluiste el ID del expediente?",
+                        icon: "warning",
+                        button: "Continuar",
+                    });
                 }
+            }
             })
+
+
         })
 
 

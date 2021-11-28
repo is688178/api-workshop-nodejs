@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="">
     </head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -106,11 +107,11 @@
     <div>
         <p class="ex1"> 
             <button  id="postButton" class="btn btn-primary btn-block" type="submit">
-                Guardar refacciones
+                Crear refacciones
             </button>
 
             <button  id="putButton" class="btn btn-secondary btn-block" type="submit">
-                Editar refacciones
+                Actualizar refacciones
             </button>
         </p>
     </div>
@@ -165,17 +166,51 @@
 
             console.log('jsonData', jsonData)
 
-            $.ajax({
+            if(jsonData.spare_part.cone == ""){
+                swal({
+                                title: "Error",
+                                text: "Las refacciones no han sido creadas. ¿Incluiste el ID del expediente?",
+                                icon: "warning",
+                                button: "Continuar",
+                            });
+            }else{
+                $.ajax({
                 //method: 'POST',
                 url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/create_spare_part',
                 type: 'POST',
                 contentType: 'application/json',
                 dataType: 'json',
                 data: JSON.stringify(jsonData),
-                success: function(response){
-                    console.log(response)
-                }
-            })
+                    statusCode: {
+                        200: function() {
+                            swal({
+                                title: "Correcto",
+                                text: "Refacciones creadas.",
+                                icon: "success",
+                                button: "Continuar",
+                            });
+                        },
+                        500: function() {
+                            swal({
+                                title: "Error",
+                                text: "Las refacciones no han sido creadas. ¿Incluiste el ID del expediente?",
+                                icon: "warning",
+                                button: "Continuar",
+                            });
+                        },
+                        default: function() {
+                            swal({
+                                title: "Error",
+                                text: "Las refacciones no han sido creadas. ¿Incluiste el ID del expediente?",
+                                icon: "warning",
+                                button: "Continuar",
+                            });
+                        }
+                    }
+                })
+            }
+
+
         })
 
         $('#putButton').on('click', function() {
@@ -204,18 +239,59 @@
 
             console.log('jsonData', jsonData)
 
-            $.ajax({
+            if(jsonData.spare_part.cone == ""){
+                swal({
+                                title: "Error",
+                                text: "Las refacciones no han sido actualizadas. ¿Incluiste el ID del expediente y seleccionaste una del listado?",
+                                icon: "warning",
+                                button: "Continuar",
+                            });
+            }else{
+                $.ajax({
                 //method: 'UPDATE',
                 url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/update_sp/'+urlParamId,
                 type: 'PUT',
                 contentType: 'application/json',
                 dataType: 'json',
                 data: JSON.stringify(jsonData),
-                success: function(response){
-                    console.log(response)
+            statusCode: {
+                200: function() {
+                    swal({
+                        title: "Correcto",
+                        text: "Refacciones actualizadas.",
+                        icon: "success",
+                        button: "Continuar",
+                    });
+                },
+                404: function() {
+                    swal({
+                        title: "Error",
+                        text: "Las refacciones no han sido actualizadas. ¿Incluiste el ID del expediente y seleccionaste una del listado?",
+                        icon: "warning",
+                        button: "Continuar",
+                    });
+                },
+                500: function() {
+                    swal({
+                        title: "Error",
+                        text: "Las refacciones no han sido actualizadas. ¿Incluiste el ID del expediente y seleccionaste una del listado?",
+                        icon: "warning",
+                        button: "Continuar",
+                    });
+                },
+                default: function() {
+                    swal({
+                        title: "Error",
+                        text: "Las refacciones no han sido actualizadas. ¿Incluiste el ID del expediente y seleccionaste una del listado?",
+                        icon: "warning",
+                        button: "Continuar",
+                    });
                 }
+            }
             })
+            }  
         })
+        
 
 
     </script>

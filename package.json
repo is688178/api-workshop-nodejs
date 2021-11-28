@@ -17,6 +17,7 @@
     "html-webpack-plugin": "^5.5.0",
     "https": "^1.0.0",
     "https-localhost": "^4.6.2",
+    "sweetalert": "^2.1.2",
     "webpack": "^5.64.4"
   },
   "devDependencies": {},
