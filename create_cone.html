@@ -25,156 +25,210 @@
         }
     </style>
 
-<div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Crear-Editar expediente</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/success">Expedientes<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/spare_parts">Refacciones</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Salir del sistema</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-</div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Crear-Editar expediente</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                <a class="nav-link" href="/success">Expedientes<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/spare_parts">Refacciones</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/logout">Salir del sistema</a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+    </div>
 
-<form method="post" id="post_cone">
-<table class="table table-dark">
+    <form method="post" id="post_cone">
+    <table class="table table-dark">
     <tr>
         <td>
-            <label>Aseguradora</label>
-            <input type="text" name="insurer" id="insurer">
-        </td>
-        <td>
-            <label>Familia</label>
-            <input type="text" name="family" id="family">
+            <label>Expediente</label>
+            <input type="text" name="cone_id" id="cone_id">
         </td>
     </tr>
-    <tr>
-        <td>
-            <label>Marca</label>
-            <input type="text" name="brand" id="brand">
-        </td>
-        <td>
-            <label>Color</label>
-            <input type="text" name="color" id="color">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label># Reporte</label>
-            <input type="text" name="report" id="report">
-        </td>
-        <td>
-            <label># Póliza</label>
-            <input type="text" name="policy" id="policy">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Fecha de Ingreso</label>
-            <input type="text" name="entrydate" id="entrydate">
-        </td>
-        <td>
-            <label>Fecha Promesa</label>
-            <input type="text" name="commitmentdate" id="commitmentdate">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Fecha de Entrega</label>
-            <input type="text" name="egressdate" id="egressdate">
-        </td>
-        <td>
-            <label># Serie</label>
-            <input type="text" name="seriesnumber" id="seriesnumber">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label># Económico</label>
-            <input type="text" name="economicnumber" id="economicnumber">
-        </td>
-        <td>
-            <label>Modelo</label>
-            <input type="text" name="model" id="model">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Placa</label>
-            <input type="text" name="plates" id="plates">
-        </td>
-        <td>
-            <label>Demérito</label>
-            <input type="number" name="demerit" id="demerit">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Riesgo</label>
-            <input type="text" name="risk" id="risk">
-        </td>
-        <td>
-            <label>Estatus</label>
-            <input type="text" name="status" id="status">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Deducible Unidad</label>
-            <input type="number" name="deductibletract" id="deductibletract">
-        </td>
-        <td>
-            <label>Deducible Adaptación</label>
-            <input type="number" name="deductibleadapt" id="deductibleadapt">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Grúa</label>
-            <input type="text" name="crane" id="crane">
-        </td>
-        <td>
-            <label>Año</label>
-            <input type="number" name="year" id="year">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>Cliente</label>
-            <input type="text" name="customer" id="customer">
-        </td>
-        <td>
-            <label>Teléfono</label>
-            <input type="text" name="phone" id="phone">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label>E-mail</label>
-            <input type="text" name="email" id="email">
-        </td>
-        <td>
-            <label>Comentarios</label>
-            <input type="text" name="comment" id="comment">
-        </td>
-    </tr>
+    </table>
+    <table class="table table-secondary">
+        <tr>
+            <td>
+                <label>Aseguradora</label>
+                <input type="text" name="insurer" id="insurer">
+            </td>
+            <td>
+                <label>Familia</label>
+                <input type="text" name="family" id="family">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Marca</label>
+                <input type="text" name="brand" id="brand">
+            </td>
+            <td>
+                <label>Color</label>
+                <input type="text" name="color" id="color">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label># Reporte</label>
+                <input type="text" name="report" id="report">
+            </td>
+            <td>
+                <label># Póliza</label>
+                <input type="text" name="policy" id="policy">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Fecha de Ingreso</label>
+                <input type="text" name="entrydate" id="entrydate">
+            </td>
+            <td>
+                <label>Fecha Promesa</label>
+                <input type="text" name="commitmentdate" id="commitmentdate">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Fecha de Entrega</label>
+                <input type="text" name="egressdate" id="egressdate">
+            </td>
+            <td>
+                <label># Serie</label>
+                <input type="text" name="seriesnumber" id="seriesnumber">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label># Económico</label>
+                <input type="text" name="economicnumber" id="economicnumber">
+            </td>
+            <td>
+                <label>Modelo</label>
+                <input type="text" name="model" id="model">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Placa</label>
+                <input type="text" name="plates" id="plates">
+            </td>
+            <td>
+                <label>Demérito</label>
+                <input type="number" name="demerit" id="demerit">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Riesgo</label>
+                <input type="text" name="risk" id="risk">
+            </td>
+            <td>
+                <label>Estatus</label>
+                <input type="text" name="status" id="status">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Deducible Unidad</label>
+                <input type="number" name="deductibletract" id="deductibletract">
+            </td>
+            <td>
+                <label>Deducible Adaptación</label>
+                <input type="number" name="deductibleadapt" id="deductibleadapt">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Grúa</label>
+                <input type="text" name="crane" id="crane">
+            </td>
+            <td>
+                <label>Año</label>
+                <input type="number" name="year" id="year">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Cliente</label>
+                <input type="text" name="customer" id="customer">
+            </td>
+            <td>
+                <label>Teléfono</label>
+                <input type="text" name="phone" id="phone">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>E-mail</label>
+                <input type="text" name="email" id="email">
+            </td>
+            <td>
+                <label>Comentarios</label>
+                <input type="text" name="comment" id="comment">
+            </td>
+        </tr>
+    </table>
     <input type="submit" name="submit" id="submit" value="Submit">
-</table>
-</form>
+    </form>
 
     <script>
-        var myArray = []
+    	var myArray = []
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        console.log(queryString)
+        if(urlParams.has('id')){
+            const urlParamId = urlParams.get('id')
+            document.getElementById('cone_id').value = urlParamId
+            console.log(urlParamId)
+            $.ajax({
+                method: 'GET',
+                url: 'https://us-central1-workshop-688178.cloudfunctions.net/app/api/read_cone/'+urlParamId,
+                success: function(response){
+                    myArray = response
+                    buildTable(myArray)
+                    console.log(myArray)
+                }
+            })
+        }
+
+        function buildTable(data){
+            document.getElementById('brand').value = data.brand
+            document.getElementById('color').value = data.color
+            document.getElementById('comment').value = data.comment
+            document.getElementById('commitmentdate').value = data.commitmentdate
+            document.getElementById('crane').value = data.crane
+            document.getElementById('customer').value = data.customer
+            document.getElementById('deductibleadapt').value = data.deductibleadapt
+            document.getElementById('deductibletract').value = data.deductibletract
+            document.getElementById('demerit').value = data.demerit
+            document.getElementById('economicnumber').value = data.economicnumber
+            document.getElementById('egressdate').value = data.egressdate
+            document.getElementById('email').value = data.email
+            document.getElementById('entrydate').value = data.entrydate
+            document.getElementById('family').value = data.family
+            document.getElementById('insurer').value = data.insurer
+            document.getElementById('model').value = data.model
+            document.getElementById('phone').value = data.phone
+            document.getElementById('plates').value = data.plates
+            document.getElementById('policy').value = data.policy
+            document.getElementById('report').value = data.report
+            document.getElementById('risk').value = data.risk
+            document.getElementById('seriesnumber').value = data.seriesnumber
+            document.getElementById('status').value = data.status
+            document.getElementById('year').value = data.year
+        }
+
+
         $(document).ready(function (){
             $('#submit').click(function() {
                 var form = document.getElementById('post_cone')
