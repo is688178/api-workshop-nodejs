@@ -182,11 +182,11 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                 let currentCell = theTable.rows[r].cells[c];
                 
                 // If the contents are special Strings then change colors.
-                if (currentCellString.includes("surtido") || currentCellString.includes("entregado")) {
+                if (currentCellString.includes("surt") || currentCellString.includes("entr")) {
                 currentCell.style.backgroundColor = 'DarkGreen';
-                } else if (currentCellString.includes("cotizado") || currentCellString.includes("comprado")) {
+                } else if (currentCellString.includes("cot") || currentCellString.includes("comp")) {
                 currentCell.style.backgroundColor = 'DarkGoldenRod';
-                } else if (currentCellString.includes("solicitado") || currentCellString.includes("pedido")){
+                } else if (currentCellString.includes("soli") || currentCellString.includes("ped")){
                 currentCell.style.backgroundColor = 'DarkRed';
                 }
             }
