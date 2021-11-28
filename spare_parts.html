@@ -24,6 +24,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
               <a class="nav-link" href="/create_cone">Crear-Editar expediente</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/create_sp">Crear-Editar refacciones</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/logout">Salir del sistema</a>
             </li>
           </ul>
@@ -39,7 +42,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     </div>
 </div>
 
-<table class="table table-dark">
+<table class="table table-striped table-dark">
     <tr  class="bg-secondary">
         <th data-column="cone" data-order="desc">Expediente &#9650</th>
         <th data-column="description" data-order="desc">Descripción &#9650</th>
@@ -151,7 +154,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		for (var i = 0; i < data.length; i++){
 			var row = `<tr>
-                        <td>${data[i].spare_part.cone}</td> 
+                        <td><a href="/create_sp?id=${data[i].id}">${data[i].spare_part.cone}</a></td> 
                         <td>${data[i].spare_part.description}</td> 
                         <td>${data[i].spare_part.priority}</td> 
                         <td>${data[i].spare_part.quantity}</td> 
